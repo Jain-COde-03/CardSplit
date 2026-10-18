@@ -87,7 +87,7 @@ async function postJson(path, body) {
       body: JSON.stringify(body),
     })
   } catch {
-    throw new Error(`Cannot reach backend server at ${apiBase}. Ensure backend is running on port 5001.`)
+    throw new Error(`Cannot reach backend server at ${apiBase}. If using Render free tier, please wait ~30 seconds for the service to wake up, then retry.`)
   }
 
   let payload

@@ -32,7 +32,7 @@ export const corsMiddleware = cors({
     if (
       allowedOrigins.has(cleanOrigin) ||
       /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(cleanOrigin) ||
-      (process.env.NODE_ENV === 'production' && cleanOrigin.endsWith('.onrender.com'))
+      cleanOrigin.endsWith('.onrender.com')
     ) {
       callback(null, true);
       return;

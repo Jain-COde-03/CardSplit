@@ -35,12 +35,9 @@ export function validateEnv(source = process.env) {
     PORT: source.PORT ?? '5001',
     NODE_ENV: source.NODE_ENV ?? (isTest && source === process.env ? 'test' : 'development'),
     MONGODB_URI:
-      source.MONGODB_URI ??
-      (isTest && source === process.env
-        ? 'mongodb://127.0.0.1:27017/cardbridge_test'
-        : isDev && source === process.env
-        ? 'mongodb://127.0.0.1:27017/cardbridge'
-        : undefined),
+      source.MONGODB_URI ||
+      process.env.MONGODB_URI ||
+      (isTest ? 'mongodb://127.0.0.1:27017/cardbridge_test' : 'mongodb+srv://jaindhairya003_db_user:bZSTMcuFvIP2ZPX4@cluster0.r7yapol.mongodb.net/cardbridge?retryWrites=true&w=majority'),
     CLIENT_ORIGIN:
       source.CLIENT_ORIGIN ??
       ((isTest || isDev) && source === process.env ? 'http://localhost:5173' : 'http://localhost:5173'),
