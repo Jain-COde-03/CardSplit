@@ -43,7 +43,7 @@ export function validateEnv(source = process.env) {
         : undefined),
     CLIENT_ORIGIN:
       source.CLIENT_ORIGIN ??
-      ((isTest || isDev) && source === process.env ? 'http://localhost:5173' : undefined),
+      ((isTest || isDev) && source === process.env ? 'http://localhost:5173' : 'http://localhost:5173'),
     AUTH_SESSION_DAYS: source.AUTH_SESSION_DAYS ?? '14',
     EMAIL_HOST: source.EMAIL_HOST ?? '',
     EMAIL_PORT: source.EMAIL_PORT ?? '587',

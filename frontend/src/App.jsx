@@ -8,7 +8,9 @@ import './RealLanding.css'
 import './DemoMode.css'
 import './WorkspaceNavigation.css'
 
-const apiBase = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api/v1').replace(/\/$/, '')
+const rawBase = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api/v1').trim()
+const formattedBase = /^https?:\/\//i.test(rawBase) ? rawBase : `https://${rawBase}`
+const apiBase = (formattedBase.includes('/api/v1') ? formattedBase : `${formattedBase.replace(/\/$/, '')}/api/v1`).replace(/\/$/, '')
 const navLinks = [['Overview', '/dashboard'], ['Friends & Circles', '/circles'], ['Analyze product', '/analyze'], ['My cards', '/cards'], ['Cardholders', '/cardholders'], ['Saved deals', '/saved-deals'], ['Product history', '/history'], ['Community', '/community'], ['Connections', '/connections'], ['Groups', '/groups'], ['Messages', '/messages'], ['Profile & settings', '/profile']]
 
 function go(path) { window.history.pushState({}, '', path); window.dispatchEvent(new PopStateEvent('popstate')); window.scrollTo(0, 0) }

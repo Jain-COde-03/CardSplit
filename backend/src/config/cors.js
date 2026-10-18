@@ -1,9 +1,14 @@
 import cors from 'cors';
 import { env } from './env.js';
 
+const clientOrigins = (env.CLIENT_ORIGIN || '')
+  .split(',')
+  .map((o) => o.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+
 const allowedOrigins = new Set(
   [
-    env.CLIENT_ORIGIN,
+    ...clientOrigins,
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://localhost:5174',
@@ -17,10 +22,17 @@ const allowedOrigins = new Set(
 
 export const corsMiddleware = cors({
   origin(origin, callback) {
+    if (!origin) {
+      callback(null, true);
+      return;
+    }
+
+    const cleanOrigin = origin.replace(/\/$/, '');
+
     if (
-      !origin ||
-      allowedOrigins.has(origin) ||
-      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+      allowedOrigins.has(cleanOrigin) ||
+      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(cleanOrigin) ||
+      (process.env.NODE_ENV === 'production' && cleanOrigin.endsWith('.onrender.com'))
     ) {
       callback(null, true);
       return;

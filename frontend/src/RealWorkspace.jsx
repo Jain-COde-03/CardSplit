@@ -4,7 +4,9 @@ import './RealSocial.css'
 import OfferCardholders from './OfferCardholders.jsx'
 import CirclesFriendsView from './CirclesFriendsView.jsx'
 
-const apiBase = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api/v1').replace(/\/$/, '')
+const rawBase = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api/v1').trim()
+const formattedBase = /^https?:\/\//i.test(rawBase) ? rawBase : `https://${rawBase}`
+const apiBase = (formattedBase.includes('/api/v1') ? formattedBase : `${formattedBase.replace(/\/$/, '')}/api/v1`).replace(/\/$/, '')
 
 const routes = [
   ['Overview', '/dashboard'],

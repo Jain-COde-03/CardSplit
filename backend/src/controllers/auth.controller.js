@@ -39,7 +39,7 @@ async function createSession(user, res) {
   res.cookie(SESSION_COOKIE, sessionToken, {
     httpOnly: true,
     secure: env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
     path: '/',
     expires: expiresAt,
   });
@@ -161,7 +161,7 @@ export async function logout(req, res, next) {
     res.clearCookie(SESSION_COOKIE, {
       httpOnly: true,
       secure: env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
     });
     return sendSuccess(res, 200, { loggedOut: true }, req.requestId);
