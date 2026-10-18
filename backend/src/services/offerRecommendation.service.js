@@ -1,10 +1,28 @@
 import CardBenefit from '../models/CardBenefit.js';
 
 export function estimateDiscount(offer, price) {
-  if (!Number.isFinite(price) || price <= 0 || offer.minimumPurchase == null || price < Number(offer.minimumPurchase)) return 0;
-  let amount = offer.discountType === 'instant_discount_flat' ? Number(offer.discountValue)
-    : offer.discountType === 'instant_discount_percentage' ? price * Number(offer.discountValue) / 100 : 0;
-  if (offer.maximumDiscount != null) amount = Math.min(amount, Number(offer.maximumDiscount));
+  if (!Number.isFinite(price) || price <= 0) return 0;
+  if (offer.minimumPurchase != null && price < Number(offer.minimumPurchase)) return 0;
+
+  let amount = 0;
+  if (
+    offer.discountType === 'instant_discount_flat' ||
+    offer.discountType === 'cashback_flat' ||
+    offer.discountType === 'emi_discount'
+  ) {
+    amount = Number(offer.discountValue) || 0;
+  } else if (
+    offer.discountType === 'instant_discount_percentage' ||
+    offer.discountType === 'cashback_percentage'
+  ) {
+    amount = (price * (Number(offer.discountValue) || 0)) / 100;
+  } else {
+    amount = Number(offer.discountValue) || 0;
+  }
+
+  if (offer.maximumDiscount != null && Number(offer.maximumDiscount) > 0) {
+    amount = Math.min(amount, Number(offer.maximumDiscount));
+  }
   return Number.isFinite(amount) ? Math.max(0, Math.min(price, Math.round(amount * 100) / 100)) : 0;
 }
 

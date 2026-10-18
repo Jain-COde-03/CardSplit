@@ -294,7 +294,11 @@ function estimateOfferSavings(offer, price) {
     if (offer.discountType === 'instant_discount_percentage' || offer.discountType === 'cashback_percentage') {
       discount = Math.round(numericPrice * ((Number(offer.discountValue) || 10) / 100))
       if (offer.maximumDiscount) discount = Math.min(discount, Number(offer.maximumDiscount))
-    } else if (offer.discountType === 'instant_discount_flat') {
+    } else if (
+      offer.discountType === 'instant_discount_flat' ||
+      offer.discountType === 'cashback_flat' ||
+      offer.discountType === 'emi_discount'
+    ) {
       discount = Number(offer.discountValue) || 1500
     } else {
       discount = Math.min(5000, Math.round(numericPrice * 0.1))
@@ -713,20 +717,36 @@ export default function RealWorkspace({ path }) {
         })
         setCalcUrl(canonicalUrl)
 
-        const rawOffers = result.data.discoveredOffers && result.data.discoveredOffers.length > 0
+        const rawOffersList = result.data.discoveredOffers && result.data.discoveredOffers.length > 0
           ? result.data.discoveredOffers
           : defaultSampleOffers
 
-        setDiscoveredOffers(rawOffers)
+        const processedOffers = rawOffersList.map((o, idx) => ({
+          ...o,
+          id: o.id || `offer-${o.bank ? o.bank.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'bank'}-${idx}`,
+          bank: o.bank || 'Bank Partner',
+          bankMonogram: o.bankMonogram || (o.bank ? o.bank.slice(0, 4).toUpperCase() : 'BANK'),
+          cardName: o.cardName || `${o.bank || 'Eligible'} Credit Card`,
+          description: o.description || o.title,
+          badge: o.badge || (
+            o.discountType?.includes('percentage')
+              ? `${o.discountValue}% OFF`
+              : o.discountValue > 0
+                ? `₹${Number(o.discountValue).toLocaleString('en-IN')} OFF`
+                : 'SPECIAL OFFER'
+          ),
+        }))
+
+        setDiscoveredOffers(processedOffers)
         const bestIdx = typeof result.data.bestPickIndex === 'number' && result.data.bestPickIndex >= 0
           ? result.data.bestPickIndex
           : 0
-        const chosen = rawOffers[bestIdx] || rawOffers[0]
+        const chosen = processedOffers[bestIdx] || processedOffers[0]
         setSelectedOfferId(chosen?.id || null)
 
-        setCalculatedCards(generateCircleCardholders(price, rawOffers, chosen, circleFilter))
-        setCalculatedStrangers(generateStrangerCardholders(price, rawOffers, chosen))
-        window.sessionStorage.setItem('cardbridge:lastAnalysis', JSON.stringify(result.data))
+        setCalculatedCards(generateCircleCardholders(price, processedOffers, chosen, circleFilter))
+        setCalculatedStrangers(generateStrangerCardholders(price, processedOffers, chosen))
+        window.sessionStorage.setItem('cardbridge:lastAnalysis', JSON.stringify({ ...result.data, discoveredOffers: processedOffers }))
         setCalcLoading(false)
         return
       } else if (result.error?.message) {
@@ -1477,8 +1497,14 @@ export default function RealWorkspace({ path }) {
                       <div className="offer-bank-card-type">{offer.cardName || 'Eligible Credit Card'}</div>
                     </div>
                   </div>
-                  <div className={`offer-discount-tag ${offer.discountType === 'cashback_percentage' ? 'cashback' : ''}`}>
-                    {offer.badge || (offer.discountValue ? `${offer.discountValue}% OFF` : 'SPECIAL OFFER')}
+                  <div className={`offer-discount-tag ${offer.discountType?.includes('cashback') ? 'cashback' : ''}`}>
+                    {offer.badge || (
+                      offer.discountType?.includes('percentage')
+                        ? `${offer.discountValue}% OFF`
+                        : offer.discountValue > 0
+                          ? `₹${Number(offer.discountValue).toLocaleString('en-IN')} OFF`
+                          : 'SPECIAL OFFER'
+                    )}
                   </div>
                 </div>
 

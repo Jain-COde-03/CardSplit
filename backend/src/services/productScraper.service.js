@@ -315,12 +315,14 @@ export class ProductScraperService {
           '-s',
           '-L',
           '--compressed',
+          '--connect-timeout',
+          '8',
           '--max-time',
-          '12',
+          '20',
           '-A',
           'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
           '-H',
-          'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+          'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
           '-H',
           'Accept-Language: en-IN,en-US;q=0.9,en;q=0.8',
           url,
@@ -338,8 +340,8 @@ export class ProductScraperService {
     // 2. Secondary Engine: Axios fallback
     try {
       const response = await axios.get(url, {
-        timeout: 8000,
-        maxContentLength: 5 * 1024 * 1024, // 5MB max
+        timeout: 10000,
+        maxContentLength: 8 * 1024 * 1024, // 8MB max
         headers: {
           'User-Agent':
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -508,29 +510,33 @@ export class ProductScraperService {
     let liveScraped = null;
 
     if (!html) {
+      // For Amazon, direct ASIN URLs (https://www.amazon.in/dp/ASIN) respond in 1-2 seconds
+      // without anti-bot throttling from long tracking slugs and referral parameters
+      let targetFetchUrl = url;
+      if (scraper.retailer === 'amazon') {
+        const asin = scraper.extractProductId(url);
+        if (asin) {
+          targetFetchUrl = `https://www.amazon.in/dp/${asin}`;
+        }
+      }
+
       try {
-        html = await this.fetchHtml(url);
+        html = await this.fetchHtml(targetFetchUrl);
       } catch (err) {
         logger.warn(
-          { url, error: err.message },
+          { url: targetFetchUrl, error: err.message },
           'Live HTML fetch blocked or unreachable.'
         );
       }
 
-      // If initial fetch was blocked or challenged on Amazon, try the clean direct ASIN URL
-      if ((!html || this.isBotChallengeHtml(html)) && scraper.retailer === 'amazon') {
-        const asin = scraper.extractProductId(url);
-        if (asin) {
-          const cleanAsinUrl = `https://www.amazon.in/dp/${asin}`;
-          if (cleanAsinUrl !== url) {
-            try {
-              const cleanHtml = await this.fetchHtml(cleanAsinUrl);
-              if (cleanHtml && !this.isBotChallengeHtml(cleanHtml)) {
-                html = cleanHtml;
-              }
-            } catch {}
+      // If clean ASIN URL was used and didn't return valid HTML, try original url as fallback
+      if ((!html || this.isBotChallengeHtml(html)) && targetFetchUrl !== url) {
+        try {
+          const fallbackHtml = await this.fetchHtml(url);
+          if (fallbackHtml && !this.isBotChallengeHtml(fallbackHtml)) {
+            html = fallbackHtml;
           }
-        }
+        } catch {}
       }
     }
 
