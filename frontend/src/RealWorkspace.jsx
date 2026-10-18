@@ -1331,7 +1331,7 @@ export default function RealWorkspace({ path }) {
           )}
 
           {/* Quick 1-Click Sample Pills */}
-          <div className="sample-pills-row">
+          {/* <div className="sample-pills-row">
             {sampleLinks.map((sample, idx) => (
               <button
                 key={idx}
@@ -1346,7 +1346,7 @@ export default function RealWorkspace({ path }) {
                 <span>₹{(sample.price / 1000).toFixed(0)}k</span>
               </button>
             ))}
-          </div>
+          </div> */}
 
           {/* 2. PRODUCT PREVIEW & LIVE PRICE ADJUSTER */}
           {calcProduct && (
