@@ -1,0 +1,243 @@
+/* Social & Messaging dark styles matching CardSplit */
+.real-social-form {
+  display: grid;
+  gap: 14px;
+}
+
+.real-social-form label {
+  display: grid;
+  gap: 7px;
+  color: #9A9AA6;
+}
+
+.real-social-form textarea {
+  resize: vertical;
+  min-height: 80px;
+  font: inherit;
+  line-height: 1.5;
+  background: #0E0E10;
+  border: 1px solid #2E2E33;
+  border-radius: 10px;
+  color: #F2F2F5;
+  padding: 12px 14px;
+}
+
+.real-social-form textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.real-social-form select {
+  max-width: 100%;
+  background: #0E0E10;
+  border: 1px solid #2E2E33;
+  border-radius: 10px;
+  color: #F2F2F5;
+  padding: 10px 14px;
+}
+
+.real-social-form .button {
+  justify-self: start;
+}
+
+.real-social-post {
+  padding: 20px 24px;
+  border-bottom: 1px solid #1F1F23;
+  background: #121214;
+}
+
+.real-social-post:last-child {
+  border-bottom: 0;
+}
+
+.real-social-post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.real-social-post-header > div {
+  display: grid;
+  gap: 3px;
+}
+
+.real-social-post-header b {
+  font-size: 13px;
+  font-weight: 600;
+  color: #F2F2F5;
+}
+
+.real-social-post-header small {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: #63636E;
+}
+
+.real-social-post > p {
+  margin: 14px 0 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #C9C9D2;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.real-member-label {
+  font-size: 11px;
+  color: #9A9AA6;
+  background: #18181B;
+  border: 1px solid #2E2E33;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.real-messages-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.4fr);
+  gap: 16px;
+  min-height: 450px;
+}
+
+.real-conversation-list {
+  align-self: start;
+  background: #121214;
+  border: 1px solid #2E2E33;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.real-conversation-list h2,
+.real-message-panel h2 {
+  font: 700 15px var(--font-sans);
+  margin: 0;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1F1F23;
+  color: #F2F2F5;
+  background: #151518;
+}
+
+.real-conversation-button {
+  display: grid;
+  width: 100%;
+  gap: 4px;
+  text-align: left;
+  padding: 14px 18px;
+  background: #121214;
+  border: 0;
+  border-bottom: 1px solid #1F1F23;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.real-conversation-button:hover,
+.real-conversation-button.active {
+  background: #18181B;
+}
+
+.real-conversation-button b {
+  font-size: 13px;
+  color: #F2F2F5;
+}
+
+.real-conversation-button small {
+  color: #9A9AA6;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.real-message-panel {
+  min-width: 0;
+  background: #121214;
+  border: 1px solid #2E2E33;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.real-message-panel > p {
+  padding: 20px;
+  color: #9A9AA6;
+}
+
+.real-message-list {
+  padding: 18px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  flex: 1;
+  max-height: 480px;
+  overflow: auto;
+}
+
+.real-message {
+  max-width: 85%;
+  justify-self: start;
+  background: #18181B;
+  border: 1px solid #2E2E33;
+  border-radius: 14px;
+  padding: 12px 16px;
+}
+
+.real-message.own {
+  justify-self: end;
+  background: #232327;
+  border-color: #3E3E45;
+}
+
+.real-message b {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: #9A9AA6;
+}
+
+.real-message p {
+  margin: 6px 0 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #F2F2F5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.real-message small {
+  font-size: 10px;
+  font-family: var(--mono);
+  color: #63636E;
+}
+
+.real-message-form {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border-top: 1px solid #1F1F23;
+  background: #151518;
+}
+
+.real-message-form input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid #2E2E33;
+  background: #0E0E10;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #F2F2F5;
+}
+
+.real-message-form input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.real-message-form .button {
+  padding: 9px 18px;
+}
+
+@media (max-width: 720px) {
+  .real-messages-layout {
+    grid-template-columns: 1fr;
+  }
+}

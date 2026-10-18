@@ -1,0 +1,138 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - link "C cardbridge" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e6]: C
+      - text: cardbridge
+    - navigation [ref=e7]:
+      - link "How it works" [ref=e8] [cursor=pointer]:
+        - /url: "#how"
+      - link "Explore offers" [ref=e9] [cursor=pointer]:
+        - /url: "#offers"
+      - link "Community" [ref=e10] [cursor=pointer]:
+        - /url: /community
+      - link "Log in" [ref=e11] [cursor=pointer]:
+        - /url: /login
+      - link "Get started ↗" [ref=e12] [cursor=pointer]:
+        - /url: /signup
+        - text: Get started
+        - generic [ref=e13]: ↗
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]: A BETTER WAY TO PAY
+      - heading [level=1] [ref=e18]:
+        - text: One product.Every eligible offer.
+        - emphasis [ref=e19]: Smarter savings.
+      - paragraph [ref=e20]: Discover credit-card offers, compare real savings, and find the smarter way to pay.
+      - generic [ref=e21]:
+        - generic [ref=e22]: Product URL
+        - generic [ref=e23]: ↗
+        - textbox "Product URL" [ref=e24]:
+          - /placeholder: Paste a product link from a supported retailer…
+        - button "Analyze product ↗" [ref=e25] [cursor=pointer]:
+          - text: Analyze product
+          - generic [ref=e26]: ↗
+      - link "Explore how it works ↓" [ref=e27] [cursor=pointer]:
+        - /url: "#how"
+      - generic [ref=e28]: ✳ Currently supporting Amazon, Flipkart & Meesho
+    - generic [ref=e29]:
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: CARDBRIDGE
+          - generic [ref=e36]: )))
+        - generic [ref=e42]: •••• •••• •••• 4829
+        - generic [ref=e43]:
+          - generic [ref=e44]: MEMBER SINCE20 24
+          - strong [ref=e45]: CB
+      - generic [ref=e47]: YOUR NEXT PURCHASE, CONSIDERED
+      - generic [ref=e49]: CARD BENEFITS, CONNECTED
+    - generic [ref=e50]: 01 / 04
+  - generic [ref=e51]:
+    - generic [ref=e52]: MAKE EVERY PURCHASE COUNT
+    - generic [ref=e53]: AMAZON
+    - generic [ref=e54]: flipkart
+    - generic [ref=e55]: meesho
+    - generic [ref=e56]: MORE RETAILERS COMING SOON
+  - generic [ref=e57]:
+    - generic [ref=e58]:
+      - text: A CLEARER WAY TO CHECK OUT
+      - generic [ref=e59]: 01 — 03
+    - generic [ref=e60]:
+      - heading [level=2] [ref=e61]:
+        - text: Good decisionsstart with
+        - emphasis [ref=e62]: clarity.
+      - paragraph [ref=e63]: Skip the guesswork. CardBridge brings the details together before you buy.
+    - generic [ref=e64]:
+      - article [ref=e65]:
+        - text: "01"
+        - generic [ref=e66]: ↗
+        - heading "Share a product link" [level=3] [ref=e67]
+        - paragraph [ref=e68]: Start with a product from a supported store. We’ll find its current details.
+      - article [ref=e69]:
+        - text: "02"
+        - generic [ref=e70]: ⌕
+        - heading "See available offers" [level=3] [ref=e71]
+        - paragraph [ref=e72]: Review discovered card offers and the conditions that come with them.
+      - article [ref=e73]:
+        - text: "03"
+        - generic [ref=e74]: ≈
+        - heading "Compare what matters" [level=3] [ref=e75]
+        - paragraph [ref=e76]: Know what you pay now, what may come later, and what remains uncertain.
+  - generic [ref=e77]:
+    - generic [ref=e78]:
+      - text: THE DETAILS, SIDE BY SIDE
+      - generic [ref=e79]: 02 — 03
+    - generic [ref=e80]:
+      - generic [ref=e81]:
+        - heading [level=2] [ref=e82]:
+          - text: See the whole
+          - emphasis [ref=e83]: picture.
+        - paragraph [ref=e84]: Instant discounts and later rewards don’t work the same way. We keep them separate, so you can choose with confidence.
+      - generic [ref=e85]: LIVE PRODUCT CHECK
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e88]: LIVE PRODUCT ANALYSIS
+        - generic [ref=e89]: Offer data is checked when you submit a supported product link.
+      - paragraph [ref=e90]: Retailer pages can change and may hide account-specific offers. Review the issuer’s latest terms before purchasing; CardBridge does not guarantee eligibility.
+  - generic [ref=e91]:
+    - generic [ref=e92]:
+      - text: C
+      - generic [ref=e93]: ↗
+    - generic [ref=e94]:
+      - generic [ref=e95]:
+        - text: SMARTER, TOGETHER
+        - generic [ref=e96]: 03 — 03
+      - heading [level=2] [ref=e97]:
+        - text: Find your people.Share what
+        - emphasis [ref=e98]: works.
+      - paragraph [ref=e99]: Connect around the cards and deals that matter to you. Your card details stay yours.
+      - link "Explore community ↗" [ref=e100] [cursor=pointer]:
+        - /url: /community
+        - text: Explore community
+        - generic [ref=e101]: ↗
+    - generic [ref=e102]:
+      - text: BUILT FORBETTERBUYING
+      - generic [ref=e105]: ✳
+  - generic [ref=e106]:
+    - generic [ref=e107]: A LITTLE MORE CERTAINTY
+    - heading [level=2] [ref=e108]:
+      - text: Your next purchasecould cost
+      - emphasis [ref=e109]: less.
+    - paragraph [ref=e110]: Start with a product link and discover the offers that may work for you.
+    - link "Find my best offer ↗" [ref=e111] [cursor=pointer]:
+      - /url: /analyze
+      - text: Find my best offer
+      - generic [ref=e112]: ↗
+  - generic [ref=e113]:
+    - link "C cardbridge" [ref=e114] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e115]: C
+      - text: cardbridge
+    - generic [ref=e116]: © 2026 CardBridge. Make every purchase count.
+    - generic [ref=e117]:
+      - link "How it works" [ref=e118] [cursor=pointer]:
+        - /url: "#how"
+      - link "Community" [ref=e119] [cursor=pointer]:
+        - /url: /community
+      - link "Privacy settings" [ref=e120] [cursor=pointer]:
+        - /url: /profile
